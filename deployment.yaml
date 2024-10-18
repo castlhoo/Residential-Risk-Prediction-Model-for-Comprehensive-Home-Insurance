@@ -1,0 +1,7 @@
+stage('Deploy to Kubernetes') {
+    steps {
+        // Jenkins의 현재 작업 디렉토리에서 deployment.yaml 파일을 찾음
+        sh 'kubectl apply -f $WORKSPACE/deployment.yaml'
+        sh 'kubectl set image deployment/pyspark-model-deployment pyspark-model-container=username/pyspark-model:${env.BUILD_ID}'
+    }
+}
